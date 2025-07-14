@@ -13,7 +13,6 @@ nltk.download("stopwords")
 
 app = Flask(__name__)
 
-# --- All your provided samples ---
 bully_samples = [
     "You're so stupid and ugly", "Nobody wants you around", "I hate you",
     "Why don't you just disappear?", "Everyone hates you", "You are a total failure",
@@ -57,7 +56,6 @@ non_bully_samples = [
     "Thanks again for helping me", "You’re truly a good friend"
 ]
 
-# --- Text Preprocessing ---
 tokenizer = TreebankWordTokenizer()
 stop_words = set(stopwords.words("english"))
 
@@ -69,12 +67,10 @@ def clean_text(text):
     tokens = tokenizer.tokenize(text)
     return " ".join([w for w in tokens if w not in stop_words])
 
-# Dataset
 X = bully_samples + non_bully_samples
 y = ["bullying"] * len(bully_samples) + ["not bullying"] * len(non_bully_samples)
 X_clean = [clean_text(text) for text in X]
 
-# Train Model
 X_train, X_test, y_train, y_test = train_test_split(X_clean, y, test_size=0.2, random_state=42)
 model = Pipeline([
     ("tfidf", TfidfVectorizer(max_features=5000)),
@@ -82,11 +78,10 @@ model = Pipeline([
 ])
 model.fit(X_train, y_train)
 
-# Evaluation
 y_pred = model.predict(X_test)
 eval_report = classification_report(y_test, y_pred)
 
-# Confidence threshold & prediction
+
 bully_index = list(model.named_steps["clf"].classes_).index("bullying")
 def predict_tweet(tweet):
     cleaned = clean_text(tweet)
