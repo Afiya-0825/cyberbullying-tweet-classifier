@@ -1,0 +1,17 @@
+
+📊 Project Summary: Cyberbullying Tweet Classifier
+
+🔍 Methodologies
+This project uses machine learning to classify tweets as either cyberbullying or not bullying. We manually prepared a dataset with realistic examples of offensive and kind messages. Each message was preprocessed to remove noise like URLs, mentions, and stopwords. Then, we converted the cleaned text into numerical features using TF-IDF (Term Frequency–Inverse Document Frequency). A Logistic Regression model was trained on these features using the Scikit-learn library. To allow real-time predictions, we built a Flask-based web app with a user-friendly interface.
+
+📈 Findings
+- The model achieved good performance on real-world samples with clear distinction between bullying and non-bullying texts.
+- It correctly flagged harmful phrases such as "Go kill yourself" as bullying, while understanding positive ones like "You're doing amazing!" as non-bullying.
+- A 50% confidence threshold was used to classify predictions. This allowed the system to generalize well and handle unclear cases more safely.
+- The model provided a useful classification report, helping us evaluate its precision, recall, and F1-score.
+
+⚠️ Challenges
+- Building a realistic and balanced dataset was difficult, especially ensuring it included diverse bullying phrases without bias.
+- Avoiding false positives (e.g., mistaking emotional or sarcastic comments as bullying) required fine-tuning and cleaning.
+- Managing text ambiguity (such as slang or coded bullying language) remains a challenge for any text-based model.
+- Deploying the model via Flask required integrating both frontend and backend carefully to handle live user input.
