@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cyberbullying Classifier</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #eafce3, #d4f4cb);
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 60px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 95%;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 2px solid #c8e6c9;
+      outline: none;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #66bb6a;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background-color: #43a047;
+    }
+    .result {
+      margin-top: 30px;
+      background-color: #e8f5e9;
+      padding: 20px;
+      border-left: 5px solid #66bb6a;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+    .hidden {
+      display: none;
+    }
+    .eval-box {
+      margin-top: 20px;
+      background: #f7fff5;
+      border: 1px solid #c5e1a5;
+      padding: 20px;
+      border-radius: 10px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Cyberbullying Tweet Classifier 🌿</h1>
+    <form method="post">
+      <input type="text" name="tweet" placeholder="Type your tweet here..." required />
+      <br>
+      <button type="submit">Predict</button>
+      <button type="submit" name="evaluation" value="1">Evaluation</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+      <strong>Prediction:</strong> {{ prediction }}<br>
+      <strong>Confidence:</strong> {{ confidence }}%
+    </div>
+    {% endif %}
+
+    {% if eval_report %}
+    <div class="eval-box">
+      <strong>Evaluation Report on Test Data:</strong><br><br>
+      {{ eval_report }}
+    </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>
